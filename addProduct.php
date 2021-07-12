@@ -133,19 +133,7 @@
 						<?php endif;?>
 
 							
-						<?php 
-						$price_size = $mysql_db->query("SELECT * FROM price_size") or die($mysql_db->error);
-						?>	
-
-						<?php if($update):?>
-							<?php if(isset($product_id)): ?>
-							<?php $ro = $mysql_db->query("SELECT * FROM product_price_size WHERE product_id = $product_id") or die( $mysql_db->error); ?>
-							<?php $pr_array = []; ?>
-							<?php foreach($ro as $v): ?>
-								<?php $pr_array[] = $v['size_id']; ?>
-							<?php endforeach;?>
-							<?php endif; ?>
-						<?php endif;?>					
+											
 
 
 
@@ -163,8 +151,8 @@
 											foreach($cate as $cat):
 									?>
 									
-									<option value="<?php echo $cat['id'] ?>"
-										<?php echo in_array($cat['id'],$uh_array) ? 'selected' : '' ?>
+									<option value="<?php echo $cat['category_id'] ?>"
+										<?php echo in_array($cat['category_id'],$uh_array) ? 'selected' : '' ?>
 									>
 									<?php echo $cat['title']?>
 									</option>
@@ -178,7 +166,7 @@
 										// while($row = $cate->fetch_assoc()):
 											foreach($cate as $cat):
 									?>
-									<option value="<?php echo $cat['id'] ?>">
+									<option value="<?php echo $cat['category_id'] ?>">
 									<?php echo $cat['title']?>
 									</option>
 									<?php endforeach; ?>
@@ -186,40 +174,7 @@
 								</select>
 							</div>
 
-							<div class="form-group">
-								<label for="title"> Select Product Price & Size</label>
-								
-								<select name="size[]" id="" class="form-control select2" multiple>
-								
-
-								<?php if($update):?>
-									<?php 
-										// while($row = $cate->fetch_assoc()):
-											foreach($price_size as $p):
-									?>
-									
-									<option value="<?php echo $p['id'] ?>"
-										<?php echo in_array($p['id'],$pr_array) ? 'selected' : '' ?>
-									>
-									<?php echo $p['title']?>
-									</option>
-									
-									<?php 
-									// endwhile; 
-									endforeach;
-									?>
-								<?php else:?>
-									<?php 
-										// while($row = $cate->fetch_assoc()):
-											foreach($price_size as $p):
-									?>
-									<option value="<?php echo $p['id'] ?>">
-									<?php echo $p['title']?>
-									</option>
-									<?php endforeach; ?>
-								<?php endif;?>
-								</select>
-							</div>
+							
 
 							<div class="form-group">
 								<label for="title"> Product Title</label>
@@ -310,8 +265,8 @@
 									
 									<tr>
 										<td>
-											<a href="addProduct.php?edit=<?php echo $row['id'];?>" class="btn btn-warning btn-sm">Edit</a>
-											<a name="delete" href="src/productcontroller.php?delete=<?php echo $row['id'];?>" class="btn btn-danger btn-sm" onClick="return confirm('Are you absolutely sure you want to delete?')">Delete</a>
+											<a href="addProduct.php?edit=<?php echo $row['product_id'];?>" class="btn btn-warning btn-sm">Edit</a>
+											<a name="delete" href="src/productcontroller.php?delete=<?php echo $row['product_id'];?>" class="btn btn-danger btn-sm" onClick="return confirm('Are you absolutely sure you want to delete?')">Delete</a>
 										</td>
 										<td><?php echo $row['title']; ?></td>
 										

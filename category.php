@@ -155,8 +155,8 @@
 										<td><?php echo $row['description'] ?></td>
 										<td><img src="upload/<?php echo $row['image']?>" alt="" width="50" height="50"></td>
 										<td>
-											<a href="category.php?edit=<?php echo $row['id'];?>" class="btn btn-warning btn-sm">Edit</a>
-											<a name="delete" href="src/controller.php?delete=<?php echo $row['id'];?>" class="btn btn-danger btn-sm" onClick="return confirm('Are you absolutely sure you want to delete?')">Delete</a>
+											<a href="category.php?edit=<?php echo $row['category_id'];?>" class="btn btn-warning btn-sm">Edit</a>
+											<a name="delete" href="src/controller.php?delete=<?php echo $row['category_id'];?>" class="btn btn-danger btn-sm" onClick="return confirm('Are you absolutely sure you want to delete?')">Delete</a>
 										</td>
 									</tr>
 									<?php endwhile; ?>

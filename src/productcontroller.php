@@ -22,7 +22,7 @@
             $price = $_POST['price'];
             $maintain = $_POST['maintain'];
             $cat_ids = $_POST['category'];
-            $price_ids = $_POST['size'];
+            
             $salePrice = $_POST['sales_price'];
             $name = $_FILES['img']['name'];
             $target_dir = "../product/";
@@ -57,10 +57,7 @@
                 $mysql_db->query("INSERT INTO product_category (product_id,category_id) VALUES('$last_id','$cat')") or die( $mysql_db->error);
             }
 
-            foreach($price_ids as $p)
-            {
-                $mysql_db->query("INSERT INTO product_price_size (product_id,size_id) VALUES('$last_id','$p')") or die( $mysql_db->error);
-            }
+            
 
             $_SESSION['file_upload'] = "Successfully Added Category!";
             header('location: ../addProduct.php');      
@@ -71,7 +68,7 @@
         {
             $category_id = $_GET['delete'];
             
-            $mysql_db->query("DELETE FROM products WHERE id = $category_id") or die( $mysql_db->error);
+            $mysql_db->query("DELETE FROM products WHERE product_id = $category_id") or die( $mysql_db->error);
 
             $_SESSION['file_upload'] = "Successfully Delete Product!";
             header('location: ../addProduct.php');
@@ -81,13 +78,13 @@
         {
             $id = $_GET['edit'];
             
-            $result = $mysql_db->query("SELECT * FROM products WHERE id = $id") or die( $mysql_db->error);        
+            $result = $mysql_db->query("SELECT * FROM products WHERE product_id = $id") or die( $mysql_db->error);        
             
             if(count(array($result)) == 1)
             {
                 $row = $result->fetch_array();
                 $title = $row['title'];
-                $product_id = $row['id'];
+                $product_id = $row['product_id'];
                 $description = $row['description'];
                 $img = $row['image'];
                 $price = $row['price'];
@@ -112,7 +109,6 @@
             $maintain = $_POST['maintain'];
             $cat_ids = $_POST['category'];
             $salePrice = $_POST['sales_price'];
-            $price_ids = $_POST['size'];
 
             // $file = $_POST['img'];
             $name = $_FILES['img']['name'];
@@ -133,12 +129,12 @@
                                     
                     // $mysql_db->query("INSERT INTO categoris (title,description,image) VALUES('$title','$description','$name')") or die( $mysql_db->error);
                     // cat_id
-                    $mysql_db->query("UPDATE products SET title ='$title',description ='$description',image = '$name',price = '$price',maintain = '$maintain', sale_price = '$salePrice' WHERE id = $id") or die ($mysql_db->error);
+                    $mysql_db->query("UPDATE products SET title ='$title',description ='$description',image = '$name',price = '$price',maintain = '$maintain', sale_price = '$salePrice' WHERE product_id = $id") or die ($mysql_db->error);
                 }
 
             }
             else {
-                $mysql_db->query("UPDATE products SET title ='$title', description ='$description', price = '$price', maintain = '$maintain', sale_price = '$salePrice' WHERE id = $id") or die ($mysql_db->error);
+                $mysql_db->query("UPDATE products SET title ='$title', description ='$description', price = '$price', maintain = '$maintain', sale_price = '$salePrice' WHERE product_id = $id") or die ($mysql_db->error);
             }
                      
             $sql = $mysql_db->query("DELETE FROM product_category WHERE product_id = $id;");
@@ -149,10 +145,7 @@
                 $mysql_db->query("INSERT INTO product_category (product_id,category_id) VALUES('$id','$cat')") or die( $mysql_db->error);
             }
 
-            foreach($price_ids as $p)
-            {
-                $mysql_db->query("INSERT INTO product_price_size (product_id,size_id) VALUES('$id','$p')") or die( $mysql_db->error);
-            }
+           
 
             $otherImgs = $_FILES['imgs']['name'];
             

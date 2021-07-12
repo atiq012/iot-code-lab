@@ -14,9 +14,9 @@
                     <a class="nav-link" href="addProduct.php">Add Product</a>
                 </li>
 
-                <li class="nav-item ">
+                <!-- <li class="nav-item ">
                     <a class="nav-link" href="addPrice.php">Add Size & Price</a>
-                </li>
+                </li> -->
                 
             </ul>
             <ul class="navbar-nav">

@@ -52,7 +52,7 @@
     {
         $category_id = $_GET['delete'];
         
-        $mysql_db->query("DELETE FROM categoris WHERE id = $category_id") or die( $mysql_db->error);
+        $mysql_db->query("DELETE FROM categoris WHERE category_id = $category_id") or die( $mysql_db->error);
         $_SESSION['file_upload'] = "Successfully Delete Category!";
         header('location: ../category.php');
     }
@@ -62,7 +62,7 @@
 
         $category_id = $_GET['edit'];
         
-        $result = $mysql_db->query("SELECT * FROM categoris WHERE id = $category_id") or die( $mysql_db->error);        
+        $result = $mysql_db->query("SELECT * FROM categoris WHERE category_id = $category_id") or die( $mysql_db->error);        
         
         if(count(array($result)) == 1)
         {
@@ -99,12 +99,12 @@
                 // Insert record
                                 
                 // $mysql_db->query("INSERT INTO categoris (title,description,image) VALUES('$title','$description','$name')") or die( $mysql_db->error);
-                $mysql_db->query("UPDATE categoris SET title ='$title', description ='$description',image = '$name' WHERE id = $id") or die ($mysql_db->error);
+                $mysql_db->query("UPDATE categoris SET title ='$title', description ='$description',image = '$name' WHERE category_id = $id") or die ($mysql_db->error);
             }
 
         }
         else {
-            $mysql_db->query("UPDATE categoris SET title ='$title', description ='$description' WHERE id = $id") or die ($mysql_db->error);
+            $mysql_db->query("UPDATE categoris SET title ='$title', description ='$description' WHERE category_id = $id") or die ($mysql_db->error);
         }
         $_SESSION['file_upload'] = "Successfully Added Category!";
         header('location: ../category.php');
