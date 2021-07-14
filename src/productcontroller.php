@@ -16,7 +16,15 @@
 
         if(isset($_POST['save']))
         {
+            $price_size = $_POST['price_size'];
+            $type = $price_size;
             
+            $t = explode(PHP_EOL, $price_size);
+            
+
+            $data = json_encode($t);
+            
+
             $title = $_POST['title'];
             $description = $_POST['description'];
             $price = $_POST['price'];
@@ -40,13 +48,13 @@
                 if(move_uploaded_file($_FILES['img']['tmp_name'],$target_dir.$name)){
                     // Insert record
                                     
-                    $sql = $mysql_db->query("INSERT INTO products (title,description,image,price,maintain,sale_price) VALUES('$title','$description','$name','$price','$maintain','$salePrice')") or die( $mysql_db->error);
+                    $sql = $mysql_db->query("INSERT INTO products (title,description,image,price,maintain,sale_price,price_size,original) VALUES('$title','$description','$name','$price','$maintain','$salePrice','$data','$type')") or die( $mysql_db->error);
                 }
 
             }
             else
             {
-                $sql = $mysql_db->query("INSERT INTO products (title,description,price,maintain,sale_price) VALUES('$title','$description','$price','$maintain','$salePrice')") or die( $mysql_db->error);
+                $sql = $mysql_db->query("INSERT INTO products (title,description,price,maintain,sale_price,price_size,original) VALUES('$title','$description','$price','$maintain','$salePrice','$data','$type')") or die( $mysql_db->error);
             }
 
             $last_id = $mysql_db->insert_id;
@@ -90,16 +98,20 @@
                 $price = $row['price'];
                 $maintain = $row['maintain'];
                 $salePrice = $row['sale_price'];
+                $type = $row['original'];
                 $update = true;
             }
         }  
 
         if(isset($_POST['update']))
         {
-            // echo "<pre>";
-            // print_r($_FILES['imgs']);
-            // echo "</pre>";
-            // die;
+            $price_size = $_POST['price_size'];
+            $type = $price_size;
+            
+            $t = explode(PHP_EOL, $price_size);
+            
+
+            $data = json_encode($t);
             
             $id = $_POST['id'];
             
@@ -129,12 +141,12 @@
                                     
                     // $mysql_db->query("INSERT INTO categoris (title,description,image) VALUES('$title','$description','$name')") or die( $mysql_db->error);
                     // cat_id
-                    $mysql_db->query("UPDATE products SET title ='$title',description ='$description',image = '$name',price = '$price',maintain = '$maintain', sale_price = '$salePrice' WHERE product_id = $id") or die ($mysql_db->error);
+                    $mysql_db->query("UPDATE products SET title ='$title',description ='$description',image = '$name',price = '$price',maintain = '$maintain', sale_price = '$salePrice',price_size = '$data' ,original = '$type' WHERE product_id = $id") or die ($mysql_db->error);
                 }
 
             }
             else {
-                $mysql_db->query("UPDATE products SET title ='$title', description ='$description', price = '$price', maintain = '$maintain', sale_price = '$salePrice' WHERE product_id = $id") or die ($mysql_db->error);
+                $mysql_db->query("UPDATE products SET title ='$title', description ='$description', price = '$price', maintain = '$maintain', sale_price = '$salePrice',price_size = '$data' ,original = '$type' WHERE product_id = $id") or die ($mysql_db->error);
             }
                      
             $sql = $mysql_db->query("DELETE FROM product_category WHERE product_id = $id;");

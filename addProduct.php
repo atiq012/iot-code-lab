@@ -44,6 +44,14 @@
 	{
 		$description = '';
 	}
+	if(isset($type))
+	{
+		$type = $type;
+	}
+	else
+	{
+		$type = '';
+	}
 	if(isset($price))
 	{
 		$price = $price;
@@ -186,6 +194,11 @@
 								<textarea type="text" class="form-control" name="description" id="description" placeholder = "Enter Product Description"><?php echo $description; ?></textarea>
 							</div>
 
+							<div class="form-group">
+								<label for="price_size"> Product Price & Size</label>
+								<textarea type="text" class="form-control" name="price_size" id="price_size" placeholder = "Product Price & Size"><?php echo $type ?></textarea>
+							</div>
+							
 							<div class="form-group">
 								<label for="maintain"> Product Install/Maintainance</label>
 								<textarea type="text" class="form-control" name="maintain" id="maintain" placeholder = "Product Install/Maintainance" ><?php echo $maintain;?></textarea>
